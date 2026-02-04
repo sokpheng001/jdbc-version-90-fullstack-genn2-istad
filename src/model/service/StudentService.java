@@ -14,4 +14,5 @@ public interface StudentService {
                                            );
     StudentResponseDto searchByUuid(String uuid);
     List<StudentResponseDto> searchStudentByName(String name);
+    List<StudentResponseDto> getAllStudents();
 }

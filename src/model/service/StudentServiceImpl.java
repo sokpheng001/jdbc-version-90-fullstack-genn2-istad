@@ -45,4 +45,12 @@ public class StudentServiceImpl
     public List<StudentResponseDto> searchStudentByName(String name) {
         return List.of();
     }
+
+    @Override
+    public List<StudentResponseDto> getAllStudents() {
+        return studentRepository.findAll()
+                .stream()
+                .map(studentMapper::mapFromStudentToStudentResponseDto)
+                .toList();
+    }
 }
