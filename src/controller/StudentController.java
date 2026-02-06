@@ -18,4 +18,10 @@ public class StudentController {
     public List<StudentResponseDto> getAllStudents(){
         return studentService.getAllStudents();
     }
+    public StudentResponseDto getByUuid(String uuid){
+        return studentService.searchByUuid(uuid);
+    }
+    public String deleteByUuid(String uuid){
+        return studentService.deleteStudentByUuid(uuid);
+    }
 }

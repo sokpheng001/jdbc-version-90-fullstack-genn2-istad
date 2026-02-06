@@ -77,6 +77,12 @@ public class UI {
                     tableDisplay(List.of(studentResponseDto));
                     pressEnterToContinue();
                 }
+                case 2->{
+                    System.out.print("[+] Insert student's UUID: ");
+                    String uuid = new Scanner(System.in).nextLine();
+                    tableDisplay(List.of(studentController.getByUuid(uuid)));
+                    pressEnterToContinue();
+                }
                 case 5->{
                     tableDisplay(studentController.getAllStudents());
                     pressEnterToContinue();

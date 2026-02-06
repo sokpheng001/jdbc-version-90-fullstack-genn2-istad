@@ -28,24 +28,43 @@ public class StudentServiceImpl
 
     @Override
     public String deleteStudentByUuid(String uuid) {
-        return "";
+        Student student = studentRepository
+                .findAll().stream()
+                .filter(s->s.getUuid().equals(uuid))
+                .findFirst().get();
+        return String.valueOf(studentRepository.delete(student));
     }
 
     @Override
-    public StudentResponseDto updateStudentByUuid(String uuid, StudentUpdateDto studentUpdateDto) {
+    public StudentResponseDto updateStudentByUuid(String uuid,
+                                                  StudentUpdateDto studentUpdateDto) {
+        Student student = studentRepository
+                .findAll().stream()
+                .filter(s->s.getUuid().equals(uuid))
+                .findFirst().get();
+        student.setProfile(studentUpdateDto.profile());
+        student.setUserName(studentUpdateDto.userName());
+        student.setEmail(studentUpdateDto.email());
+        student.setBirthOfDate(studentUpdateDto.birdOfDate());
+        studentRepository.update(student);
         return null;
     }
-
     @Override
     public StudentResponseDto searchByUuid(String uuid) {
-        return null;
+        Student student = studentRepository
+                .findAll().stream()
+                .filter(s->s.getUuid().equals(uuid))
+                .findFirst().get();
+        return studentMapper.mapFromStudentToStudentResponseDto(
+                studentRepository.findById(
+                        student.getId()
+                )
+        );
     }
-
     @Override
     public List<StudentResponseDto> searchStudentByName(String name) {
         return List.of();
     }
-
     @Override
     public List<StudentResponseDto> getAllStudents() {
         return studentRepository.findAll()
